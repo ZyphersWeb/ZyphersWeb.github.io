@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Element exposing (Element, column, el, row, text, padding)
+import Element exposing (Element, column, el, row, text, padding, centerX, centerY, layout)
 import Element.Background as Background
 import Element.Events exposing (onClick)
 import Projects
@@ -48,7 +48,7 @@ update msg model =
 
 view : Model -> Element Msg
 view model =
-    column []
+    column [centerX, paddingMedium]
         [ header
         , case model.currentPage of
             Home ->
