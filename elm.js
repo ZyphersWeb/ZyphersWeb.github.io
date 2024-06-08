@@ -11164,15 +11164,10 @@ var $mdgriffith$elm_ui$Element$column = F2(
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
 var $author$project$Main$Contact = {$: 'Contact'};
-var $author$project$Main$Projects = {$: 'Projects'};
 var $author$project$Main$NavigateTo = function (a) {
 	return {$: 'NavigateTo', a: a};
 };
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 'AlignX', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
-var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
+var $author$project$Main$Projects = {$: 'Projects'};
 var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$StyleClass,
@@ -11182,6 +11177,57 @@ var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
 			'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
 			'background-color',
 			clr));
+};
+var $mdgriffith$elm_ui$Element$rgb = F3(
+	function (r, g, b) {
+		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
+	});
+var $author$project$Styles$rgb255 = F3(
+	function (r, g, b) {
+		return A3($mdgriffith$elm_ui$Element$rgb, r / 255, g / 255, b / 255);
+	});
+var $author$project$Styles$backgroundColorLight = $mdgriffith$elm_ui$Element$Background$color(
+	A3($author$project$Styles$rgb255, 248, 248, 248));
+var $author$project$Styles$backgroundColorMedium = $mdgriffith$elm_ui$Element$Background$color(
+	A3($author$project$Styles$rgb255, 200, 200, 200));
+var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
+var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderRound,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Single,
+			'br-' + $elm$core$String$fromInt(radius),
+			'border-radius',
+			$elm$core$String$fromInt(radius) + 'px'));
+};
+var $author$project$Styles$borderRounded = $mdgriffith$elm_ui$Element$Border$rounded(5);
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 'AlignX', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
+var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
+var $author$project$Styles$centered = $mdgriffith$elm_ui$Element$centerX;
+var $mdgriffith$elm_ui$Internal$Flag$borderColor = $mdgriffith$elm_ui$Internal$Flag$flag(28);
+var $mdgriffith$elm_ui$Element$Border$color = function (clr) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'bc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
+			'border-color',
+			clr));
+};
+var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'fc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(fontColor),
+			'color',
+			fontColor));
 };
 var $mdgriffith$elm_ui$Element$el = F2(
 	function (attrs, child) {
@@ -11236,47 +11282,56 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			f,
 			f));
 };
-var $mdgriffith$elm_ui$Element$rgb = F3(
-	function (r, g, b) {
-		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
+var $author$project$Styles$paddingSmall = $mdgriffith$elm_ui$Element$padding(10);
+var $mdgriffith$elm_ui$Internal$Model$Class = F2(
+	function (a, b) {
+		return {$: 'Class', a: a, b: b};
 	});
-var $author$project$Main$rgb255 = F3(
-	function (r, g, b) {
-		return A3($mdgriffith$elm_ui$Element$rgb, r / 255, g / 255, b / 255);
-	});
-var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
-var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$borderRound,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Single,
-			'br-' + $elm$core$String$fromInt(radius),
-			'border-radius',
-			$elm$core$String$fromInt(radius) + 'px'));
-};
+var $mdgriffith$elm_ui$Internal$Flag$borderStyle = $mdgriffith$elm_ui$Internal$Flag$flag(11);
+var $mdgriffith$elm_ui$Element$Border$solid = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$borderStyle, $mdgriffith$elm_ui$Internal$Style$classes.borderSolid);
 var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 	return {$: 'Text', a: a};
 };
 var $mdgriffith$elm_ui$Element$text = function (content) {
 	return $mdgriffith$elm_ui$Internal$Model$Text(content);
 };
-var $author$project$Main$button = F2(
-	function (label, page) {
+var $mdgriffith$elm_ui$Internal$Model$BorderWidth = F5(
+	function (a, b, c, d, e) {
+		return {$: 'BorderWidth', a: a, b: b, c: c, d: d, e: e};
+	});
+var $mdgriffith$elm_ui$Element$Border$width = function (v) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderWidth,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$BorderWidth,
+			'b-' + $elm$core$String$fromInt(v),
+			v,
+			v,
+			v,
+			v));
+};
+var $author$project$Styles$buttonStyle = F2(
+	function (label, msg) {
 		return A2(
 			$mdgriffith$elm_ui$Element$el,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$padding(10),
-					$mdgriffith$elm_ui$Element$Border$rounded(5),
-					$mdgriffith$elm_ui$Element$Background$color(
-					A3($author$project$Main$rgb255, 200, 200, 200)),
-					$mdgriffith$elm_ui$Element$centerX,
-					$mdgriffith$elm_ui$Element$Events$onClick(
-					$author$project$Main$NavigateTo(page))
+					$author$project$Styles$paddingSmall,
+					$author$project$Styles$borderRounded,
+					$author$project$Styles$backgroundColorMedium,
+					$mdgriffith$elm_ui$Element$Font$color(
+					A3($author$project$Styles$rgb255, 0, 0, 0)),
+					$mdgriffith$elm_ui$Element$Border$color(
+					A3($author$project$Styles$rgb255, 100, 100, 100)),
+					$mdgriffith$elm_ui$Element$Border$width(1),
+					$mdgriffith$elm_ui$Element$Border$solid,
+					$author$project$Styles$centered,
+					$mdgriffith$elm_ui$Element$Events$onClick(msg)
 				]),
 			$mdgriffith$elm_ui$Element$text(label));
 	});
+var $author$project$Styles$paddingMedium = $mdgriffith$elm_ui$Element$padding(20);
 var $mdgriffith$elm_ui$Internal$Model$AsRow = {$: 'AsRow'};
 var $mdgriffith$elm_ui$Internal$Model$asRow = $mdgriffith$elm_ui$Internal$Model$AsRow;
 var $mdgriffith$elm_ui$Element$row = F2(
@@ -11297,46 +11352,71 @@ var $mdgriffith$elm_ui$Element$row = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
+var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
+var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
+var $mdgriffith$elm_ui$Element$Font$size = function (i) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontSize,
+		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
+var $author$project$Styles$textHeader = function (content) {
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(32),
+				$mdgriffith$elm_ui$Element$Font$bold
+			]),
+		content);
+};
 var $author$project$Main$header = A2(
 	$mdgriffith$elm_ui$Element$el,
 	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$Background$color(
-			A3($author$project$Main$rgb255, 248, 248, 248)),
-			$mdgriffith$elm_ui$Element$padding(20),
-			$mdgriffith$elm_ui$Element$centerX
-		]),
+		[$author$project$Styles$backgroundColorLight, $author$project$Styles$paddingMedium, $author$project$Styles$centered]),
 	A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_Nil,
 		_List_fromArray(
 			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_Nil,
+				$author$project$Styles$textHeader(
 				$mdgriffith$elm_ui$Element$text('My Portfolio')),
 				A2(
 				$mdgriffith$elm_ui$Element$row,
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2($author$project$Main$button, 'Home', $author$project$Main$Home),
-						A2($author$project$Main$button, 'Projects', $author$project$Main$Projects),
-						A2($author$project$Main$button, 'Contact', $author$project$Main$Contact)
+						A2(
+						$author$project$Styles$buttonStyle,
+						'Home',
+						$author$project$Main$NavigateTo($author$project$Main$Home)),
+						A2(
+						$author$project$Styles$buttonStyle,
+						'Projects',
+						$author$project$Main$NavigateTo($author$project$Main$Projects)),
+						A2(
+						$author$project$Styles$buttonStyle,
+						'Contact',
+						$author$project$Main$NavigateTo($author$project$Main$Contact))
 					]))
 			])));
+var $author$project$Styles$textBody = function (content) {
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(16)
+			]),
+		content);
+};
 var $author$project$Main$homeView = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_Nil,
 	_List_fromArray(
 		[
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			$author$project$Styles$textHeader(
 			$mdgriffith$elm_ui$Element$text('Welcome to My Portfolio!')),
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			$author$project$Styles$textBody(
 			$mdgriffith$elm_ui$Element$text('Explore my projects and feel free to get in touch.'))
 		]));
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
@@ -11373,10 +11453,16 @@ var $mdgriffith$elm_ui$Internal$Model$map = F2(
 	});
 var $mdgriffith$elm_ui$Element$map = $mdgriffith$elm_ui$Internal$Model$map;
 var $author$project$Contact$Submit = {$: 'Submit'};
-var $author$project$Contact$rgb255 = F3(
-	function (r, g, b) {
-		return A3($mdgriffith$elm_ui$Element$rgb, r / 255, g / 255, b / 255);
-	});
+var $author$project$Styles$textSubHeader = function (content) {
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(24),
+				$mdgriffith$elm_ui$Element$Font$bold
+			]),
+		content);
+};
 var $author$project$Contact$labeledInput = F2(
 	function (label, placeholder) {
 		return A2(
@@ -11384,19 +11470,12 @@ var $author$project$Contact$labeledInput = F2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_Nil,
+					$author$project$Styles$textSubHeader(
 					$mdgriffith$elm_ui$Element$text(label)),
 					A2(
 					$mdgriffith$elm_ui$Element$el,
 					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$Background$color(
-							A3($author$project$Contact$rgb255, 245, 245, 245)),
-							$mdgriffith$elm_ui$Element$padding(10),
-							$mdgriffith$elm_ui$Element$Border$rounded(5)
-						]),
+						[$author$project$Styles$backgroundColorLight, $author$project$Styles$paddingSmall, $author$project$Styles$borderRounded]),
 					$mdgriffith$elm_ui$Element$text(placeholder))
 				]));
 	});
@@ -11405,55 +11484,32 @@ var $author$project$Contact$view = A2(
 	_List_Nil,
 	_List_fromArray(
 		[
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			$author$project$Styles$textHeader(
 			$mdgriffith$elm_ui$Element$text('Contact')),
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			$author$project$Styles$textBody(
 			$mdgriffith$elm_ui$Element$text('Feel free to reach out to me!')),
 			A2($author$project$Contact$labeledInput, 'Your Name:', 'Name'),
 			A2($author$project$Contact$labeledInput, 'Your Email:', 'Email'),
 			A2($author$project$Contact$labeledInput, 'Your Message:', 'Message'),
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$padding(10),
-					$mdgriffith$elm_ui$Element$Border$rounded(5),
-					$mdgriffith$elm_ui$Element$Background$color(
-					A3($author$project$Contact$rgb255, 200, 200, 200)),
-					$mdgriffith$elm_ui$Element$centerX,
-					$mdgriffith$elm_ui$Element$Events$onClick($author$project$Contact$Submit)
-				]),
-			$mdgriffith$elm_ui$Element$text('Send'))
+			A2($author$project$Styles$buttonStyle, 'Send', $author$project$Contact$Submit)
 		]));
 var $author$project$Projects$view = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_Nil,
 	_List_fromArray(
 		[
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			$author$project$Styles$textHeader(
 			$mdgriffith$elm_ui$Element$text('Projects')),
 			A2(
 			$mdgriffith$elm_ui$Element$column,
 			_List_Nil,
 			_List_fromArray(
 				[
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_Nil,
+					$author$project$Styles$textBody(
 					$mdgriffith$elm_ui$Element$text('Project 1: Description of project 1.')),
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_Nil,
+					$author$project$Styles$textBody(
 					$mdgriffith$elm_ui$Element$text('Project 2: Description of project 2.')),
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_Nil,
+					$author$project$Styles$textBody(
 					$mdgriffith$elm_ui$Element$text('Project 3: Description of project 3.'))
 				]))
 		]));

@@ -1,14 +1,12 @@
 module Main exposing (..)
 
 import Browser
-import Element exposing (Element, column, el, row, text, centerX, padding)
+import Element exposing (Element, column, el, row, text, padding)
 import Element.Background as Background
-import Element.Border as Border
 import Element.Events exposing (onClick)
-import Element.Font as Font
 import Projects
 import Contact
-import Html exposing (Html)
+import Styles exposing (..)
 
 
 -- MODEL
@@ -66,29 +64,23 @@ view model =
 
 header : Element Msg
 header =
-    el [ Background.color (rgb255 248 248 248), padding 20, centerX ]
+    el [ backgroundColorLight, paddingMedium, centered ]
         (column []
-            [ el [] (text "My Portfolio")
+            [ textHeader (text "My Portfolio")
             , row []
-                [ button "Home" Home
-                , button "Projects" Projects
-                , button "Contact" Contact
+                [ buttonStyle "Home" (NavigateTo Home)
+                , buttonStyle "Projects" (NavigateTo Projects)
+                , buttonStyle "Contact" (NavigateTo Contact)
                 ]
             ]
         )
 
 
-button : String -> Page -> Element Msg
-button label page =
-    el [ padding 10, Border.rounded 5, Background.color (rgb255 200 200 200), centerX, onClick (NavigateTo page) ]
-        (text label)
-
-
 homeView : Element Msg
 homeView =
     column []
-        [ el [] (text "Welcome to My Portfolio!")
-        , el [] (text "Explore my projects and feel free to get in touch.")
+        [ textHeader (text "Welcome to My Portfolio!")
+        , textBody (text "Explore my projects and feel free to get in touch.")
         ]
 
 
@@ -101,8 +93,3 @@ main =
         , update = update
         , view = Element.layout [] << view
         }
-
-
-rgb255 : Int -> Int -> Int -> Element.Color
-rgb255 r g b =
-    Element.rgb (toFloat r / 255) (toFloat g / 255) (toFloat b / 255)
