@@ -1,15 +1,15 @@
 module Projects exposing (view)
 
-import Html exposing (Html, div, h2, ul, li, text)
+import Element exposing (Element, column, el, text)
 
 
-view : Html msg
+view : Element msg
 view =
-    div []
-        [ h2 [] [ text "Projects" ]
-        , ul []
-            [ li [] [ text "Project 1: Description of project 1." ]
-            , li [] [ text "Project 2: Description of project 2." ]
-            , li [] [ text "Project 3: Description of project 3." ]
+    column []
+        [ el [] (text "Projects")
+        , column []
+            [ el [] (text "Project 1: Description of project 1.")
+            , el [] (text "Project 2: Description of project 2.")
+            , el [] (text "Project 3: Description of project 3.")
             ]
         ]

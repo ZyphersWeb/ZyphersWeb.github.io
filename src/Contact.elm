@@ -1,24 +1,36 @@
 module Contact exposing (view, Msg)
 
-import Html exposing (Html, div, h2, p, label, input, button, text)
-import Html.Attributes exposing (placeholder, type_)
-import Html.Events exposing (onClick)
+import Element exposing (Element, column, el, text, padding, centerX)
+import Element.Events exposing (onClick)
+import Element.Border as Border
+import Element.Background as Background
 
 
 type Msg
     = Submit
 
 
-view : Html Msg
+view : Element Msg
 view =
-    div []
-        [ h2 [] [ text "Contact" ]
-        , p [] [ text "Feel free to reach out to me!" ]
-        , label [] [ text "Your Name:" ]
-        , input [ placeholder "Name" ] []
-        , label [] [ text "Your Email:" ]
-        , input [ type_ "email", placeholder "Email" ] []
-        , label [] [ text "Your Message:" ]
-        , input [ placeholder "Message" ] []
-        , button [ onClick Submit ] [ text "Send" ]
+    column []
+        [ el [] (text "Contact")
+        , el [] (text "Feel free to reach out to me!")
+        , labeledInput "Your Name:" "Name"
+        , labeledInput "Your Email:" "Email"
+        , labeledInput "Your Message:" "Message"
+        , el [ padding 10, Border.rounded 5, Background.color (rgb255 200 200 200), centerX, onClick Submit ]
+            (text "Send")
         ]
+
+
+labeledInput : String -> String -> Element msg
+labeledInput label placeholder =
+    column []
+        [ el [] (text label)
+        , el [ Background.color (rgb255 245 245 245), padding 10, Border.rounded 5 ] (text placeholder)
+        ]
+
+
+rgb255 : Int -> Int -> Int -> Element.Color
+rgb255 r g b =
+    Element.rgb (toFloat r / 255) (toFloat g / 255) (toFloat b / 255)

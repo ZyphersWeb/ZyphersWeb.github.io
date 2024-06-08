@@ -1,11 +1,14 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, h1, nav, a, text, p)
-import Html.Attributes exposing (class, href)
-import Html.Events exposing (onClick)
+import Element exposing (Element, column, el, row, text, centerX, padding)
+import Element.Background as Background
+import Element.Border as Border
+import Element.Events exposing (onClick)
+import Element.Font as Font
 import Projects
 import Contact
+import Html exposing (Html)
 
 
 -- MODEL
@@ -45,9 +48,9 @@ update msg model =
 
 -- VIEW
 
-view : Model -> Html Msg
+view : Model -> Element Msg
 view model =
-    div []
+    column []
         [ header
         , case model.currentPage of
             Home ->
@@ -57,31 +60,49 @@ view model =
                 Projects.view
 
             Contact ->
-                Html.map ContactMsg Contact.view
+                Element.map ContactMsg Contact.view
         ]
 
 
-header : Html Msg
+header : Element Msg
 header =
-    div [ class "header" ]
-        [ h1 [] [ text "My Portfolio" ]
-        , nav []
-            [ a [ href "#", onClick (NavigateTo Home) ] [ text "Home" ]
-            , a [ href "#", onClick (NavigateTo Projects) ] [ text "Projects" ]
-            , a [ href "#", onClick (NavigateTo Contact) ] [ text "Contact" ]
+    el [ Background.color (rgb255 248 248 248), padding 20, centerX ]
+        (column []
+            [ el [] (text "My Portfolio")
+            , row []
+                [ button "Home" Home
+                , button "Projects" Projects
+                , button "Contact" Contact
+                ]
             ]
-        ]
+        )
 
 
-homeView : Html Msg
+button : String -> Page -> Element Msg
+button label page =
+    el [ padding 10, Border.rounded 5, Background.color (rgb255 200 200 200), centerX, onClick (NavigateTo page) ]
+        (text label)
+
+
+homeView : Element Msg
 homeView =
-    div []
-        [ h1 [] [ text "Welcome to My Portfolio!" ]
-        , p [] [ text "Explore my projects and feel free to get in touch." ]
+    column []
+        [ el [] (text "Welcome to My Portfolio!")
+        , el [] (text "Explore my projects and feel free to get in touch.")
         ]
 
 
 -- MAIN
 
+main : Program () Model Msg
 main =
-    Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox
+        { init = init
+        , update = update
+        , view = Element.layout [] << view
+        }
+
+
+rgb255 : Int -> Int -> Int -> Element.Color
+rgb255 r g b =
+    Element.rgb (toFloat r / 255) (toFloat g / 255) (toFloat b / 255)
