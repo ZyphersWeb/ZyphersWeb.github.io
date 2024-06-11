@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Element exposing (Element, column, el, row, text, padding, centerX, centerY, layout)
+import Element.Border as Border
 import Element.Background as Background
 import Element.Events exposing (onClick)
 import Projects
@@ -12,7 +13,10 @@ import Styles exposing (..)
 -- MODEL
 
 type alias Model =
-    { currentPage : Page }
+    { currentPage : Page 
+    -- , menuOpen    : Bool
+    -- , animation   : State
+    }
 
 
 type Page
@@ -23,7 +27,10 @@ type Page
 
 init : Model
 init =
-    { currentPage = Home }
+    { currentPage = Home 
+    -- , menuOpen    = False
+    -- , animation   = Anim.init
+    }
 
 
 -- UPDATE
@@ -42,7 +49,6 @@ update msg model =
         ContactMsg contactMsg ->
             -- Handle Contact messages if needed
             model
-
 
 -- VIEW
 
@@ -64,7 +70,7 @@ view model =
 
 header : Element Msg
 header =
-    el [ backgroundColorLight, paddingMedium, centered ]
+    el headerStyle
         (column []
             [ textHeader (text "My Portfolio")
             , row []

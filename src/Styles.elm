@@ -25,6 +25,14 @@ backgroundColorMedium : Attribute msg
 backgroundColorMedium =
     Background.color (rgb255 200 200 200)
 
+backgroundColorDarkBlue : Attribute msg
+backgroundColorDarkBlue =
+    Background.color (rgb255 3 15 252)
+
+backgroundColorLightBlue : Attribute msg
+backgroundColorLightBlue =
+    Background.color (rgb255 118 208 222)
+
 
 backgroundColorDark : Attribute msg
 backgroundColorDark =
@@ -66,7 +74,7 @@ buttonStyle label msg =
     el
         [ paddingSmall
         , borderRounded
-        , backgroundColorMedium
+        , backgroundColorLightBlue
         , Font.color (rgb255 0 0 0)
         , Border.color (rgb255 100 100 100)
         , Border.width 1
@@ -82,3 +90,12 @@ buttonStyle label msg =
 centered : Attribute msg
 centered =
     centerX
+
+headerStyle : List (Attribute msg)
+headerStyle = 
+    [Border.widthEach {bottom = 40, left = 0, right = 0, top = 0}
+    , Border.color (rgb255 255 255 255)
+    , backgroundColorLight
+    , paddingMedium
+    , centered
+    ]
