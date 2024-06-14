@@ -9,13 +9,17 @@ import Projects
 import Contact
 import Styles exposing (..)
 
+import Menu 
+import Html exposing (Html)
+import Animation as Anim exposing (px)
+import Animation exposing ( State)
+import Time
 
 -- MODEL
 
 type alias Model =
     { currentPage : Page 
-    -- , menuOpen    : Bool
-    -- , animation   : State
+    ,  style : Anim.State
     }
 
 
@@ -28,8 +32,6 @@ type Page
 init : Model
 init =
     { currentPage = Home 
-    -- , menuOpen    = False
-    -- , animation   = Anim.init
     }
 
 
@@ -38,7 +40,26 @@ init =
 type Msg
     = NavigateTo Page
     | ContactMsg Contact.Msg
+    | Show
+    | Hide
+    | Animate Anim.Msg
 
+type alias Styles = 
+    { open : List Anim.Property
+    , closed : List Anim.Property
+    }
+
+styles : Styles
+styles = 
+    { open = 
+        [ Anim.left (px 0.0)
+        , Anim.opacity 1.0
+        ]
+    , closed = 
+        [ Anim.left (px -200.0)
+        , Anim.opacity 0
+        ]
+    }
 
 update : Msg -> Model -> Model
 update msg model =
@@ -49,6 +70,21 @@ update msg model =
         ContactMsg contactMsg ->
             -- Handle Contact messages if needed
             model
+        Show ->
+            ( { model | style =
+                    Animation.interrupt[Animation.to styles.open] model.style
+              }
+            , Cmd.none
+            )
+        Hide ->
+            ( { model | style =
+                    Animation.interrupt[Animation.to styles.closed] model.style
+              }
+            , Cmd.none
+            )
+        Animate animMsg ->
+            ({model | style = Animation.update animMsg model.style}
+            , Cmd.none)
 
 -- VIEW
 
@@ -56,6 +92,7 @@ view : Model -> Element Msg
 view model =
     column [centerX, paddingMedium]
         [ header
+        , menu1.view
         , case model.currentPage of
             Home ->
                 homeView
@@ -88,7 +125,6 @@ homeView =
         [ textHeader (text "Welcome to My Portfolio!")
         , textBody (text "Explore my projects and feel free to get in touch.")
         ]
-
 
 -- MAIN
 
